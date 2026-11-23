@@ -1,69 +1,94 @@
-# BRI Virtual City · Kota Nusantara
+# Numind Nusantara Racing 🏁🥭
 
-Prototipe interaktif berbentuk satu halaman web: berjalan-jalan bebas di kota Indonesia bergaya isometrik biru senja. Tidak ada misi atau poin, hanya menjelajah.
+Game balap kart 3D bertema Nusantara yang berjalan langsung di browser, baik di HP maupun desktop. Dibuat oleh **Numind**.
 
-> **Catatan:** semua nama tempat, merek, dan layanan di dalam kota bersifat fiktif dan hanya untuk keperluan prototipe. Warga yang kamu ajak ngobrol adalah karakter simulasi, bukan pengguna sungguhan.
+Tanpa framework, tanpa dependensi, tanpa unduhan aset: seluruh game (model 3D, tekstur, musik, efek suara) dibangkitkan lewat kode dan WebGL, lalu dikemas dalam **satu file `index.html`**.
+
+> English: a self-contained 3D kart racer for the browser (touch and desktop), themed on Indonesian landmarks. Single `index.html`, raw WebGL, no dependencies.
+
+| | |
+|---|---|
+| ![Margonda, Depok](docs/screenshots/depok-lanskap.jpg) | ![Monas, Jakarta](docs/screenshots/jakarta-monas.jpg) |
+| ![Danau Kampus UI](docs/screenshots/ui-danau.jpg) | ![Pilih Piala](docs/screenshots/pilih-piala.jpg) |
+
+<p align="center"><img src="docs/screenshots/gunung-potret.jpg" width="260" alt="Tanjakan Gunung, mode potret"></p>
+
+## Main sekarang
+
+Setelah diunggah ke GitHub, aktifkan **GitHub Pages** (lihat bagian [Deploy](#deploy-ke-github-pages)). Game bisa juga dibuka langsung dengan mengklik dua kali `index.html`; cukup koneksi internet untuk memuat font Fredoka dari Google Fonts (tanpa internet tetap jalan dengan font cadangan).
 
 ## Fitur
 
-- **Pilih avatar** dari 12 karakter, lalu **ubah nama** (maksimal 14 huruf, tersimpan di browser).
-- **Jalan-jalan bebas** dengan joystick, keyboard, atau ketuk di peta.
-- **Naik kendaraan:** motor, taksi, bajaj, becak, angkot, bus kota, perahu, kapal pinisi, dan kereta komuter. Kendaraan bisa dipanggil dari menu.
-- **Masuk gedung:** bank, hotel, museum, kafe, pasar, pusat belanja, masjid, dan dek pandang Menara Brilian, masing-masing dengan interior dan keterangan benda.
-- **Ganti baju** dengan menu mirip game Roblox. **Dresscode:** Jas, Kaos, dan Jaket Mantri, plus set, atasan, bawahan, sepatu, topi, aksesori, rambut, dan warna kulit.
-- **Ngobrol** dengan warga simulasi: balon ucapan di atas kepala, jendela chat, kalimat cepat, dan balasan otomatis.
-- **Emote, lompat, dan klakson.**
-- **Waktu:** senja, malam, dan siang.
-- **Responsif** untuk HP (potret dan lanskap), tablet, dan desktop.
+- **6 lintasan** dalam 2 piala Grand Prix:
+  - 🌴 **Piala Nusantara:** Sawah Terasering, Pantai Kelapa, Tanjakan Gunung (menanjak ke puncak berkabut, hutan pinus, salju)
+  - 🏙️ **Piala Jabodetabek:** Jakarta Malam (Monas, Bundaran HI, JPO, ondel-ondel), Margonda Depok (ruko, angkot, Tugu Belimbing, KRL lewat), Kampus UI (danau, Perpustakaan, Balairung, bikun, KRL)
+- **12 karakter** dengan keunggulan berbeda (kecepatan, akselerasi, kelincahan, tameng, drift, dan lain-lain)
+- **4 kendaraan:** Truk Gizi, Pickup Desa 4x4, Ojol Hijau, Kurir Oranye
+- **Mode:** Grand Prix, Balapan Cepat, Time Trial
+- **Mangga 🥭:** tiap mangga memberi poin dan mengisi NOS 10%. NOS ditahan untuk nitro. Skor juga datang dari drift, serangan, lap, dan posisi finis.
+- **Power-slide (drift)** bertingkat dengan turbo, start roket, papan turbo, dan rampa lompatan
+- **Item:** Sambal (peluru pencari), Paku (ranjau), Tameng, Turbo; pembalap di belakang mendapat item lebih bagus
+- 7 pembalap AI dengan rubber banding
+- **Ramah HP:** kontrol sentuh berikon, mode lanskap dan potret, layar penuh, resolusi menyesuaikan performa
+- HUD sederhana yang tidak menutupi jalan, dengan satu satuan ukuran yang proporsional di semua layar
+- Musik dan efek suara dibangkitkan lewat Web Audio, tiap lintasan punya tema musik sendiri
 
 ## Kontrol
 
-| Aksi | Layar sentuh | Keyboard |
-| --- | --- | --- |
-| Jalan / mengemudi | Joystick kiri bawah, atau ketuk tanah | WASD / panah, atau klik tanah |
-| Masuk gedung / naik / turun | Tombol kuning | `E` |
-| Lompat / klakson | Tombol panah di kanan bawah | `Spasi` |
-| Menu Jelajah | Tombol **Jelajah** | `J` |
-| Kendaraan / Baju / Emote | Tiga tombol bulat | `V` / `B` / `G` |
-| Profil dan nama | Tab **Profil** | `P` |
-| Ngobrol | Tombol **Ngobrol** | `T` |
-| Zoom | Cubit, atau tombol + dan − | Roda mouse, `+` / `-` |
+| Aksi | Keyboard | Sentuh |
+|---|---|---|
+| Gas | `↑` / `W` | otomatis |
+| Rem / mundur | `↓` / `S` | tombol cakram |
+| Belok | `←` `→` / `A` `D` | panah kiri / kanan (geser jari untuk berpindah) |
+| Lompat kecil + drift | `Shift` / `Spasi` | ikon tikungan (tahan) |
+| Pakai item | `E` / `Ctrl` | ikon item |
+| NOS (tahan) | `N` / `Q` | ikon botol |
+| Kembali ke lintasan | `R` | |
+| Jeda / suara | `Esc` `P` / `M` | tombol di HUD |
 
-## Menjalankan di komputer
+Gamepad juga didukung.
 
-Tidak perlu build atau instalasi. Buka `index.html` di browser, atau jalankan server lokal:
+## Struktur proyek
 
-```bash
-python3 -m http.server 8000
-# lalu buka http://localhost:8000
+```
+index.html        game siap main (hasil build, satu file)
+build.js          menggabungkan src/ + logo menjadi index.html
+assets/logo.png   logo Numind (disematkan sebagai data URI)
+src/
+  m_math.js       vektor, matriks, utilitas
+  m_models.js     model 3D prosedural: kendaraan, karakter, tekstur kanvas
+  m_scenery.js    pemandangan: pohon, gedung, Monas, Tugu, KRL, dan lain-lain
+  m_tracks.js     definisi dan generator lintasan (spline, tepi jalan, medan gunung)
+  m_gl.js         renderer WebGL 1 (shader, kabut, langit, partikel)
+  m_audio.js      musik dan efek suara
+  m_game.js       fisika kart, item, AI, skor, aturan balapan
+  m_ui.js         menu, HUD, kontrol sentuh, layar hasil
+  body.html       markup HUD dan menu
+  style.css       gaya
+docs/screenshots/ gambar untuk README
 ```
 
-## Publikasi dengan GitHub Pages
+## Build ulang
 
-1. Buat repositori baru di GitHub, lalu unggah semua isi folder ini (`index.html`, `README.md`, `.nojekyll`, `.gitignore`).
+Perlu Node.js (tanpa paket tambahan):
+
+```bash
+node build.js        # menghasilkan index.html
+npx serve .          # opsional: jalankan server lokal
+```
+
+Edit file di `src/`, jalankan `node build.js`, lalu muat ulang `index.html`.
+
+## Deploy ke GitHub Pages
+
+1. Buat repositori baru di GitHub, lalu unggah seluruh isi folder ini (termasuk `index.html` dan `.nojekyll`).
 2. Buka **Settings → Pages**.
-3. Pada **Build and deployment**, pilih **Deploy from a branch**, lalu cabang `main` dan folder `/ (root)`, kemudian **Save**.
-4. Setelah satu atau dua menit, halaman tersedia di `https://<nama-akun>.github.io/<nama-repo>/`.
+3. Pada **Build and deployment**, pilih **Deploy from a branch**, branch `main`, folder `/ (root)`, lalu **Save**.
+4. Tunggu sekitar satu menit. Game tersedia di `https://<username>.github.io/<nama-repo>/`.
 
-Dengan Git dari terminal:
+## Catatan
 
-```bash
-git init
-git add .
-git commit -m "Kota Nusantara: prototipe awal"
-git branch -M main
-git remote add origin https://github.com/<nama-akun>/<nama-repo>.git
-git push -u origin main
-```
-
-## Catatan teknis
-
-- Satu berkas HTML mandiri (HTML, CSS, dan JavaScript), tanpa dependensi dan tanpa permintaan jaringan.
-- Dirender dengan Canvas 2D (proyeksi isometrik 2:1). Avatar dan benda kota digambar dengan kode.
-- Nama pemain disimpan di `localStorage` dengan kunci `briCityNick`. Tidak ada data yang dikirim ke server.
-- Kualitas gambar menyesuaikan otomatis bila perangkat terasa berat.
-- Chat adalah simulasi lokal. Chat antarpengguna sungguhan memerlukan server (misalnya WebSocket) dan belum ada di prototipe ini.
-
-## Lisensi
-
-Belum ditentukan. Tambahkan berkas `LICENSE` sesuai kebutuhan sebelum repositori dibuat publik.
+- Seluruh karakter, kendaraan, dan lintasan dalam game ini adalah rekaan dan hanya terinspirasi tempat dan suasana nyata. Karakter berupa kartun orisinal, bukan potret orang sungguhan.
+- Game ini terinspirasi dari gaya balap kart arkade klasik, tetapi tidak memakai kode, model, musik, atau aset dari game lain.
+- Logo Numind (`assets/logo.png`) milik Numind.
+- Lisensi: belum ditentukan. Tambahkan berkas `LICENSE` sesuai kebutuhan sebelum repositori dibuat publik.
